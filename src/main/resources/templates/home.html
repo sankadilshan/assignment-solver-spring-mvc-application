@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Assignment Solver</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+    body {
+      background: white;
+      height: 100rem;
+    }
+
+    .nav {
+      position: absolute;
+      top: 3rem;
+      right: 10rem;
+    }
+
+    .nav ul li {
+      display: inline;
+      color: #A93226;
+      margin-left: 2px;
+      font-size: large;
+
+    }
+    #username{
+       position: absolute;
+       top: 8rem;
+       left: 7rem;
+       color: white;
+       font-family: fantasy;
+     }
+    .b {
+      background: #A93226;
+      outline: none;
+      color: white;
+      width: 15rem;
+    }
+
+    .btn:active:focus,
+    .btn:focus {
+      outline: none;
+    }
+
+    .b:hover {
+      background: white;
+      color: #A93226;
+      outline: none;
+    }
+
+    #sidenav {
+      width: 31rem;
+      height: 63rem;
+      background: #A93226;
+      position: fixed;
+      top: 0;
+
+    }
+
+    #sidenav #pimage {
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      background: #CD6155;
+      position: relative;
+      top: 14rem;
+      left: 5rem;
+    }
+
+    #pimage img {
+      width: 17rem;
+      height: 17rem;
+      margin: 5px 0px 0px 5px;
+      border-radius: 50%;
+    }
+
+    #menu {
+      position: relative;
+      top: 16rem;
+      left: -3rem;
+    }
+
+    #menu ul li {
+      list-style: none;
+      color: #CACFD2;
+      font-size: large;
+      font-weight: 600;
+      padding-bottom: 1rem;
+      text-align: center;
+
+    }
+
+    #menu ul li:hover {
+      color: white;
+      cursor: pointer;
+    }
+
+    #heading {
+      position: absolute;
+      top: 17rem;
+      margin-left: 35rem;
+    }
+
+    #heading #hf {
+      font-size: 80pt;
+      color: teal;
+      font-weight: bolder;
+      font-style: normal;
+    }
+
+    #heading #hs {
+      font-size: 80pt;
+      color: #A93226;
+      font-weight: bolder;
+      font-style: normal;
+      position: absolute;
+      left: 33rem;
+      top: 0rem;
+    }
+
+    #heading blockquote {
+      border-left: 23px solid #a93226;
+      color: teal;
+      font-size: larger;
+      font-family: cursive;
+    }
+
+    #hi1 {
+      position: relative;
+      top: -9rem;
+      left: 70rem;
+      transform: rotate(30deg);
+    }
+
+    .hi {
+      width: 40px;
+
+    }
+
+    .hi {
+      width: 40px;
+    }
+
+    #heading h4 {
+      color: teal;
+      font-size: medium;
+      margin: -83px 0px 0px -2px;
+    }
+
+    #fhi3 {
+      position: relative;
+      top: -6rem;
+      margin-left: 12rem;
+    }
+
+    .n {
+      position: absolute;
+      top: 31rem;
+      right: 14rem;
+
+    }
+
+    .body {
+      position: absolute;
+      top: 60rem;
+      left: 32rem;
+      background: #e2a39d1c;
+      width: 102rem;
+      padding: 20px;
+
+    }
+
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid teal;
+      border-radius: 5px;
+      width: 23rem;
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .card-img-top {
+      width: 8rem;
+      border: 1px solid teal;
+      border-left: 8px solid teal;
+      border-radius: 5px;
+      margin: 11px 1px 1px 15px;
+    }
+
+    .date {
+     margin-top: -16px;
+     margin-left: 3px;
+     margin-bottom: -7px;
+
+    }
+    .date p{
+    margin: -21px 1px 1px 67px;
+    color:teal
+    }
+
+    .card-title {
+      border-top: 1px solid teal;
+      background-color: rgba(0, 160, 61, 0.18);
+      padding: 4px
+    }
+
+    .card-text {
+      padding-left: 1rem;
+    }
+
+    .d {
+      background: transparent;
+      outline: none;
+      margin: -5rem 1rem 1rem 10rem;
+
+    }
+
+    .d:hover {
+      cursor: pointer;
+      outline: none;
+    }
+
+    .card-footer {
+      border-top: 1px solid teal;
+      background-color: rgba(0, 160, 61, 0.18);
+      height: 24px;
+      padding-left: 1rem;
+
+    }
+
+    .b1 {
+      background: #7eaf90;
+      outline: none;
+      color: white;
+      width: 12rem;
+      margin-left:0rem;
+      margin-bottom:-7px;
+    }
+
+    .b1:hover {
+      cursor: pointer;
+      color: white;
+    }
+
+    #loadMore {
+      background: #A93226;
+      outline: none;
+      color: white;
+      width: 15rem;
+      padding: 7px;
+      border-radius: 5px;
+      margin-left: 43rem;
+      margin-top: 1rem;
+    }
+
+    form {
+      color: teal;
+    }
+
+    #signin, #signup {
+      color: #A93226;
+    }
+    .modal-header .close {
+      margin-top: -19px;
+    }
+    .p-f, .confirmation{
+      background: white;
+      padding: 2rem;
+      border-radius: 5px;
+      border: 1px solid teal;
+      color: teal;
+
+    }
+    .footer{
+      width: 103rem;
+      height: 5rem;
+      background: #A93226;
+      padding: 6px;
+      color: white;
+      margin-left: -28px;
+    margin-bottom: -15px;
+    text-align: center;
+    padding-top: 14px;
+    }
+   a{
+    color:white;
+   }
+   a:focus, a:hover {
+    color: #5fceaf;
+    text-decoration: underline;
+}
+   .al{
+     position: fixed;
+    top: 5rem;
+    left: 56rem;
+    z-index: 100;
+    width: 40rem;
+    text-align: center;
+   }
+  .i{
+  position: relative;
+    top: -7rem;
+    left: 2rem;
+    background: teal;
+    border-radius: 50%;
+    color: white;
+    padding: 5%;
+    font-weight:400
+  }
+  .privacy{
+      width: 78%;
+    background: white;
+    height: fit-content;
+    color: teal;
+    z-index: 1000;
+    position:absolute;
+    left:31rem;
+    bottom:-25px;
+    display:block;
+    padding:20px;
+  }
+  .privacy blockquote{
+   border-radius: 5px;
+   border: 1px solid teal;
+   width:  99%;
+   padding:20px;
+   margin-bottom:-1rem
+  }
+
+
+    </style>
+    <script>
+    $(document).ready(function () {
+      $(".card").slice(0, 8).show();
+      $("#loadMore").on("click", function (e) {
+        e.preventDefault();
+        $(".card:hidden").slice(0, 4).slideDown();
+        if ($(".card:hidden").length == 0) {
+          $("#loadMore").text("No Content").addClass("noContent");
+        }
+      });
+
+    })
+
+    function showAlert(){
+     document.getElementById("alert").style.visibility="visible";
+    }
+    function hideAlert(){
+     document.getElementById("alert").style.visibility="hidden";
+    }
+    setTimeout("showAlert()",2000);
+    setTimeout("hideAlert()",10000);
+
+
+
+
+    </script>
+</head>
+
+<body>
+<div id="alert" style="visibility:hidden;">
+    <div th:if="${param.condition}" class="alert alert-success al">
+        <strong>Sucess! </strong><span th:text="${param.message}"></span>
+    </div>
+    <div th:if="${param._condition}" class="alert alert-danger al">
+        <strong>Failure! </strong><span th:text="${param.message}"></span>
+    </div>
+</div>
+<div class="nav">
+    <ul>
+        <li th:if="${loginFalse}"><a href="signin">
+            <button type="button" class=" btn-lg b"><b>Sign
+                in</b></button>
+        </a>
+        </li>
+        <li th:if="${loginFalse}"><a href="signup">
+            <button type="button" class=" btn-lg b"><b>Sign
+                up</b></button>
+        </a>
+        </li>
+        <li th:if="${loginSuccess}"><a href="logout">
+            <button type="button" class=" btn-lg b">
+                <b>Logout</b></button>
+        </a>
+        </li>
+    </ul>
+
+</div>
+<div id="sidenav">
+    <div id="pimage">
+        <!--profile image-->
+        <img th:if="${loginSuccess}" src="/profileImage" alt="profile image">
+    </div>
+    <h3 id="username" th:text="${currentUser}">not sign in</h3>
+    <br>
+    <div id="menu">
+        <ul>
+            <li>
+            <li>
+                <a href="/home">All Assignments</a>
+            </li>
+            </li>
+            <li>
+                <a href="#getassingment">Get Assignment</a>
+            </li>
+            <li>
+                <a href="#postassingment">Post Assignment</a>
+            </li>
+            <li>
+                <a href="#" data-target="#about" data-toggle="modal"> About us</a>
+            </li>
+            <li>
+                <a href="#" data-target="#privacyPolicy" data-toggle="modal">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="#" data-target="#about" data-toggle="modal">Contact us</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="heading">
+    <h1 id="hf">ASSIG</h1>
+    <h1 id="hs">NMENT</h1> <img id="hi1" src="https://img.icons8.com/cotton/64/000000/last-24-hours.png"/>
+    <h4><b>Earn Money Doing Assignment | Upload your Assignment | Find Freelanzers Do Your Assignment </b></h4>
+    <br>
+    <blockquote>
+        orem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+        et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+        Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+    </blockquote>
+    <div>
+        <figure>
+            <img class="hi" src="https://img.icons8.com/ios-filled/50/000000/group-background-selected.png"/> :&nbsp;&nbsp;
+            <span th:text="${members}"></span>
+            <figcaption>members</figcaption>
+        </figure>
+        <figure id="fhi3">
+
+            <img class="hi" src="https://img.icons8.com/dotty/80/000000/document.png"/> :&nbsp;&nbsp;<span
+                th:text="${assignments}"></span>
+            <figcaption>assignments</figcaption>
+        </figure>
+    </div>
+    <nav class="navbar navbar-light bg-light n">
+        <form class="form-inline" th:action="@{/search}" method="post" th:object="${search}">
+            <div class="form-group">
+                <input list="sub" class="form-control mr-sm-2" id="subjectsInput" name="subject" placeholder="Search"
+                       aria-label="Search">&nbsp;&nbsp;
+                <datalist id="sub">
+                    <option th:each="subject:${subjectsList}" th:value="${subject}" th:label="${subject}"></option>
+                </datalist>
+            </div>
+            <button class="btn btn-primary b" type="submit">Search by Subject</button>
+        </form>
+    </nav>
+
+</div>
+<br>
+<div class="body">
+    <div>
+        <div class="flex">
+            <div class="card" th:each="pdf :${pdfs}">
+                <div th:switch="${pdf.contentType}">
+                    <img th:case="'PDF'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/pdf.png"/>
+                    <img th:case="'DOC'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/word.png"/>
+                    <img th:case="'IMG'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/image.png"/>
+                    <img th:case="'OTHER'" class="card-img-top"
+                         src="https://img.icons8.com/wired/64/000000/window-other.png"/>
+                </div>
+                <a th:href="@{/download(id=${pdf.assignmentId})}">
+                    <button class="d btn my-2 my-sm-0" type="submit"><img
+                            src="https://img.icons8.com/metro/26/000000/download.png"/></button>
+                </a>
+                <span class="i" th:text="${pdf.assignmentId}"></span>
+                <div class="date"><span>End date: <p th:text="${pdf.endDate}">2020/05/23</p></span></div>
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${pdf.subject}"><b>Digital Image Processing</b></h5>
+                    <p class="card-text" th:text="${pdf.description}">This is a wider card with supporting text below as
+                        a
+                        natural lead-in to additional
+                        content. This content is a little bit longer.</p>
+                    <p style="margin-left:1rem;"><strong>Published: </strong> <span
+                            th:text="${#strings.abbreviate(pdf.username,10)}">Nimal Perera</span>
+                        <a href="#mail">
+                            <button class="btn my-2 my-sm-0 b1">get assignment</button>
+                        </a>
+                    </p>
+
+                </div>
+                <div class="card-footer">
+                    <small>Last Update: </small><small class="text-muted" th:text="${pdf.createDate}"></small>
+                </div>
+            </div>
+            <!-- cards -->
+        </div>
+    </div>
+    <div>
+        <button class="b" id="loadMore">Load More</button>
+    </div>
+    <br>
+    <!-- upload form -->
+    <div class="p-f">
+        <div id="postassingment"></div>
+        <h4><b>Upload Assignment</b></h4>
+        <form th:action="@{/assignment}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject"
+                       placeholder="subject field (image processing, maths, sinhala, research)" required>
+            </div>
+            <div class="form-group">
+                <label for="assignmentdescription">Description</label>
+                <textarea class="form-control" id="assignmentdescription" name="description" rows="3"
+                          placeholder="description about your assignment" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="enddate">End Date</label>
+                <input type="date" class="form-control" id="enddate" name="endDate" min="0" required>
+                <small id="datehint" class="form-text text-muted">must be future date</small>
+            </div>
+            <div class="form-group">
+                <label for="file">Assignment File</label>
+                <input type="file" class="custom-file-input f" name="assignmentFile" id="file" required>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary b" onclick="showAlert()">Upload</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <!-- form confirmation -->
+    <div id="getassingment"></div>
+    <div class="confirmation">
+        <h4>Tell Publisher you like to do his/her assignment</h4>
+        <!-- email address display -->
+        <form th:action="@{/mail}" th:object="${mail}" method="post" id="mail">
+            <div class="form-group">
+                <label for="id">Assignment id</label>
+                <input type="text" class="form-control" id="id" name="assignmentId"
+                       placeholder="add selected assignment id" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Message to Publisher</label>
+                <input type="text" class="form-control" id="msg" name="msg" placeholder="write your msg" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Your Contact </label>
+                <input type="text" class="form-control" id="contact" name="contact" placeholder="add your contact"
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary b">Send mail</button>
+        </form>
+    </div>
+    <br>
+    <div class="footer">
+        <p>@alright recieved</p>
+    </div>
+    <div class="modal" id="privacyPolicy">
+        <div class="privacy modal-dialog ">
+
+            <blockquote class="modal-content">
+                <h3>Privacy Policy</h3>
+                <p style="font-size:small;">orem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+                    <br>
+                    orem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+                    <br>
+                    orem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,<br>
+                    orem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+                </p>
+            </blockquote>
+        </div>
+    </div>
+    <div class="modal" id="about">
+        <div class="privacy modal-dialog ">
+
+            <blockquote class="modal-content">
+                <h3>About us</h3>
+                <p style="font-size:small;">orem ipsum dolor sit amet, consectetuer adipiscing elit.
+                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+                    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+                    <br>
+                </p>
+                </hr>
+                <br>
+                <h3>Contact</h3>
+                <p>
+                    <b>
+                        <pre style="background:teal; color:white; font-size:11pt">
+                          assignmentsolver@gmail.com
+                          Colombo 07,
+                          Sri Lanka
+                       </pre>
+                    </b>
+                </p>
+            </blockquote>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

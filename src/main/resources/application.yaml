@@ -1,0 +1,55 @@
+server:
+  port: 9001
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  data:
+    mongodb:
+      database: assignmentStore
+      host: localhost
+      port: 27017
+      repositories:
+        type: auto
+        enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  security:
+    user:
+      name: foo
+      password: foo
+      roles:
+        - ADMIN
+        - USER
+  output:
+    ansi:
+      enabled: ALWAYS
+  jackson:
+    date-format: "dd-MM-yyyy"
+    serialization:
+      write_dates_as_timestamps: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sltechprimers@gmail.com
+    password: jusffbeiplhwryth
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: true
+client:
+  validity:
+    time: 36000
+upload:
+  dir: /resources
+
+
+
+
