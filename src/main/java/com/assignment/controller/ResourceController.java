@@ -79,14 +79,14 @@ public class ResourceController {
 
 
 
-        logger.info("user iamge" + currentUser.getEmail());
+        //logger.info("user iamge" + currentUser.getEmail());
         return "home";
     }
 
 
     @GetMapping("/profileImage")
     public void dislpayProfileImage(HttpServletResponse response) throws IOException {
-        logger.info("current user 1 " + "email");
+       // logger.info("current user 1 " + "email");
         UserGetDto user = userService.getCurrentUser();
         response.setContentType("image/jpeg,image/png,image/jpg, image/gif");
         response.getOutputStream().write(user.getImage());
@@ -95,7 +95,7 @@ public class ResourceController {
 
     @GetMapping("/signin")
     public String getLogin() {
-        logger.info("redirect to sign in page");
+       // logger.info("redirect to sign in page");
         return "signin";
     }
 
@@ -107,7 +107,7 @@ public class ResourceController {
     @GetMapping("/signinerror")
     public String error(Model model) {
 //        model.addAttribute("condition",false);
-        logger.error("error login ......");
+        //logger.error("error login ......");
         return "signin";
     }
 
@@ -139,7 +139,7 @@ public class ResourceController {
     @GetMapping("/download")
     public ResponseEntity<?> download(@RequestParam("id") String id, HttpServletResponse response) throws ChangeSetPersister.NotFoundException {
         AssignmentMultipart assignmentMultipart = assignmentService.downloadFile(Integer.parseInt(id));
-        logger.info("download " + id);
+       // logger.info("download " + id);
         response.setContentType(assignmentMultipart.getFileType());
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(assignmentMultipart.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + assignmentMultipart.getFileName() + "\"")
@@ -148,7 +148,7 @@ public class ResourceController {
 
     @PostMapping("/mail")
     public RedirectView sendMail(@ModelAttribute(name = "mail") Mail mail, Model model,RedirectAttributes redirect) {
-        logger.info("assignment id"+ mail.getAssignmentId());
+      //  logger.info("assignment id"+ mail.getAssignmentId());
         boolean send = mailService.send(mail);
         if (send) {
             redirect.addAttribute("condition", send);
@@ -163,7 +163,7 @@ public class ResourceController {
 
     @PostMapping("/search")
     public String getSearchAssignment(@ModelAttribute("search") Search search, Model model) {
-        logger.info("search value" + search);
+        //logger.info("search value" + search);
         List<Assignment> collect = getAllAssignment().stream().filter(assignment -> assignment.getSubject().equals(search.getSubject())).collect(Collectors.toList());
         collect.forEach(assignment -> System.out.println(assignment.getContentType()));
         UserGetDto currentUser = userService.getCurrentUser();
@@ -207,11 +207,11 @@ public class ResourceController {
                     String[] split=assignment.getContentType().split("/",2);
                     if (split[1].equals("pdf")) {
                         assignment.setContentType("PDF");
-                        logger.info("pdf"+split[1]);
+                       // logger.info("pdf"+split[1]);
                     }
                     else if (split[1].equals("msword") || split[1].equals("octet-stream")) {
                         assignment.setContentType("DOC");
-                        logger.info("msword"+split[1]);
+                       // logger.info("msword"+split[1]);
                     }
                     else if (split[1].equals("jpeg") || split[1].equals("png") || split[1].equals("jpg")) {
                         assignment.setContentType("IMG");
