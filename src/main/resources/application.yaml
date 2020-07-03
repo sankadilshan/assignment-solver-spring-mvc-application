@@ -6,12 +6,19 @@ spring:
       max-file-size: 10MB
   data:
     mongodb:
-      database: assignmentStore
-      host: localhost
-      port: 27017
-      repositories:
-        type: auto
-        enabled: true
+      uri: mongodb+srv://assignmentsolver:865PlejVOMNaJ3fN@assignmentsolver.69t4m.mongodb.net/AssignmentSolver?retryWrites=true&w=majority
+      database: AssignmentSolver
+
+
+
+#  data:
+#    mongodb:
+#      database: assignmentStore
+#      host: localhost
+#      port: 27017
+#      repositories:
+#        type: auto
+#      enabled: true
   jpa:
     hibernate:
       ddl-auto: 'create-drop'

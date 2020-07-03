@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserGetDto {
     private String email;
-    private byte[] image;
+    private byte[] image=new byte[]{};
     private String originalName;
     private String contentType;
 }
