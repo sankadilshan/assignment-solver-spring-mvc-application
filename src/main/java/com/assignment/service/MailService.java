@@ -25,6 +25,7 @@ public class MailService {
 
     public boolean send(Mail mail){
         AssignmentMail toAddress = findToAddress(mail.getAssignmentId());
+        String currentUserEmail=userService.getCurrentUser().getEmail();
         String subject="REQUIRED ASSIGNMENT NO: "+mail.getAssignmentId() + "SUBJECT: "+toAddress.getSubject().toUpperCase();
         String body="Hi "+toAddress.getEmail().split("@")[0].toString()+"\n\n"+
                 "Assignment id: "+mail.getAssignmentId()+"\n"+
@@ -32,13 +33,13 @@ public class MailService {
                 "Description: "+toAddress.getDescription()+"\n"+
                 "Upload date: "+toAddress.getCreatedDate().toString()+"\n\n"+
                 mail.getMsg()+"\n\n"+
-                userService.getCurrentUser().getEmail().split("@")[0].toString()+"\n"+
+                currentUserEmail.split("@")[0].toString()+"\n"+
                 "Thank You "+"\n"+
                 "This message delivered by Assignment Solver platform. Don't reply and contact through details in mail ";
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo("sankadilshan9686@gmail.com");
-            message.setCc("sanka1012@outlook.com");
+            message.setTo(toAddress.getEmail());
+            message.setCc(currentUserEmail);
             message.setSubject(subject);
             message.setText(body);
             message.setSentDate(new Date());

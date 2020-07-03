@@ -29,7 +29,7 @@ public class AssignmentService implements Compress {
     private UserService userService;
 
     public List<Assignment> getAllAssignments(){
-        Sort createDate = Sort.by("createDate").descending();
+        Sort createDate = Sort.by("createDate").ascending();
        return assignmentRepository.findAll(createDate);
     }
     @Transactional
