@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9090
 spring:
   servlet:
     multipart:
@@ -8,6 +8,12 @@ spring:
     mongodb:
       uri: mongodb+srv://assignmentsolver:865PlejVOMNaJ3fN@assignmentsolver.69t4m.mongodb.net/AssignmentSolver?retryWrites=true&w=majority
       database: AssignmentSolver
+    rest:
+      base-path: /
+    cassandra:
+      request:
+        timeout: 10s
+
 
 
 
