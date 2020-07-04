@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService, Compress {
         User _user = new User();
         _user.setEmail(user.getEmail());
         _user.setPassword(password);
-       // _user.setImage(Compress.compressBytes(image.getBytes()));
+        _user.setImage(Compress.compressBytes(image.getBytes()));
         _user.setContentType(image.getContentType());
         _user.setOriginalName(image.getOriginalFilename());
         userRepository.save(_user);
@@ -63,8 +63,8 @@ public class UserService implements UserDetailsService, Compress {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> user = userRepository.findByEmail(auth.getName());
         User u = user.get();
-       // return new UserGetDto(u.getEmail(), Compress.decompressBytes(u.getImage()), u.getOriginalName(), u.getContentType());
-        return new UserGetDto(u.getEmail(), new byte[]{}, u.getOriginalName(), u.getContentType());
+        return new UserGetDto(u.getEmail(), Compress.decompressBytes(u.getImage()), u.getOriginalName(), u.getContentType());
+        //return new UserGetDto(u.getEmail(), new byte[]{}, u.getOriginalName(), u.getContentType());
 
     }
 

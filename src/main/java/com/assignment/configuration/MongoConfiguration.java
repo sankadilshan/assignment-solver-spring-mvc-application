@@ -30,7 +30,7 @@ public class MongoConfiguration implements CommandLineRunner {
 
         user.setEmail("sanka@gmail.com");
 //    user.setPassword(passwordEncoder.encode("12346"));
-        user.setImage(new byte[]{});
+        //user.setImage(new byte[]{});
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
         a.setAssignmentFile(new byte[]{});

@@ -85,10 +85,11 @@ public class ResourceController {
 
 
     @GetMapping("/profileImage")
-    public void dislpayProfileImage(HttpServletResponse response) throws IOException {
-       // logger.info("current user 1 " + "email");
+    public void dislpayProfileImage(HttpServletResponse response,Model model) throws IOException {
+        logger.info("current user 1 " + "email");
         UserGetDto user = userService.getCurrentUser();
         response.setContentType("image/jpeg,image/png,image/jpg, image/gif");
+       // byte[] data = user.getImage().getData();
         response.getOutputStream().write(user.getImage());
         response.getOutputStream().close();
     }
@@ -107,7 +108,7 @@ public class ResourceController {
     @GetMapping("/signinerror")
     public String error(Model model) {
 //        model.addAttribute("condition",false);
-        //logger.error("error login ......");
+        logger.error("error login ......");
         return "signin";
     }
 
@@ -139,7 +140,7 @@ public class ResourceController {
     @GetMapping("/download")
     public ResponseEntity<?> download(@RequestParam("id") String id, HttpServletResponse response) throws ChangeSetPersister.NotFoundException {
         AssignmentMultipart assignmentMultipart = assignmentService.downloadFile(Integer.parseInt(id));
-       // logger.info("download " + id);
+        logger.info("download " + id);
         response.setContentType(assignmentMultipart.getFileType());
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(assignmentMultipart.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + assignmentMultipart.getFileName() + "\"")
@@ -148,7 +149,7 @@ public class ResourceController {
 
     @PostMapping("/mail")
     public RedirectView sendMail(@ModelAttribute(name = "mail") Mail mail, Model model,RedirectAttributes redirect) {
-      //  logger.info("assignment id"+ mail.getAssignmentId());
+        logger.info("assignment id"+ mail.getAssignmentId());
         boolean send = mailService.send(mail);
         if (send) {
             redirect.addAttribute("condition", send);
@@ -163,7 +164,7 @@ public class ResourceController {
 
     @PostMapping("/search")
     public String getSearchAssignment(@ModelAttribute("search") Search search, Model model) {
-        //logger.info("search value" + search);
+        logger.info("search value" + search);
         List<Assignment> collect = getAllAssignment().stream().filter(assignment -> assignment.getSubject().equals(search.getSubject())).collect(Collectors.toList());
         collect.forEach(assignment -> System.out.println(assignment.getContentType()));
         UserGetDto currentUser = userService.getCurrentUser();

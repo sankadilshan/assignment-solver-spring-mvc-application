@@ -6,7 +6,7 @@ spring:
       max-file-size: 10MB
   data:
     mongodb:
-      uri: mongodb+srv://assignmentsolver:865PlejVOMNaJ3fN@assignmentsolver.69t4m.mongodb.net/AssignmentSolver?retryWrites=true&w=majority
+      uri: mongodb+srv://assignmentsolver:865PlejVOMNaJ3fN@assignmentsolver.69t4m.mongodb.net/AssignmentSolver?retryWrites=true&w=majority&ssl=true
       database: AssignmentSolver
     rest:
       base-path: /
