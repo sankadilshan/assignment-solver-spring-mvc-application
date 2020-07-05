@@ -341,6 +341,7 @@
    margin-bottom:-1rem
   }
 
+/* //for mobile */
   @media only screen and (max-width: 380px){
      
     /* body{
@@ -349,115 +350,159 @@
 
     #sidenav {
       width: 100%;
-    height: 11rem;
+    height: 7rem;
     background: #A93226;
-    position: fixed;
-    top: 12px;
-    border-radius: 13px;
+    position: absolute;
+    /* top: 12px; */
+    border-radius: 5px;
     z-index: 100;
 }
-
 #sidenav #pimage {
-    width: 20rem;
-    height: 20rem;
+  width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     background: #CD6155;
     position: absolute;
-    top: 12rem;
-    left: 4rem;
+    top: 10rem;
+    left: 3rem;
+
 }
 #username {
-    position: absolute;
-    top: 17rem;
-    left: 27rem;
-    color: teal;
+  position: relative;
+    top: 12rem;
+    left: 12rem;
+    color: #1a3a3a;
     font-family: fantasy;
-    font-size: xx-large;
+    font-size: 19pt;
+    z-index: auto;
 }
 #menu {
     position: absolute;
-    top: 3rem;
+    top: 1rem;
     /* left: 4rem; */
     /* font-size: 12pt; */
     /* float: right; */
 }
 #menu ul li {
-    list-style: none;
+  list-style: none;
     color: #2d7dad;
-    font-size: xx-large;
+    font-size: unset;
     font-weight: 100;
-    padding-left: 15px;
-    /* text-align: center; */
+    padding-left: 8px;
+    text-align: center;
     display: inline;
 }
 .nav {
-    position: absolute;
-    top: 18rem;
-    right: -90rem;
+  position: absolute;
+    top: 8rem;
+    right: 1rem;
 }
 .nav ul li {
     display: inline;
     color: #A93226;
     margin-left: 2px;
-    font-size: 22pt;
+    font-size: unset;
+}
+.b{
+  background: #A93226;
+    outline: none;
+    color: white;
+    width: 7rem;
+    font-size: 6pt;
 }
 #heading {
-    position: absolute;
-    top: 31rem;
-    margin-left: 9rem;
+  position: absolute;
+    top: 17rem;
+    margin-left: 3rem;
 }
 #heading #hf {
-    font-size: 130pt;
-    color: teal;
+  color: teal;
     font-weight: bolder;
     font-style: normal;
+    font-size: 31pt;
 }
 #heading #hs {
-    font-size: 130pt;
+  font-size: 31pt;
     color: #A93226;
     font-weight: bolder;
     font-style: normal;
     position: absolute;
-    left: 54rem;
+    left: 128px;
     top: 0rem;
 }
 #hi1 {
-    position: relative;
-    top: -13rem;
-    left: 110rem;
+  position: relative;
+    top: -4rem;
+    left: 27rem;
     transform: rotate(30deg);
-    width: 12rem;
+    width: 40px;
 }
 #heading h4 {
-    color: teal;
-    font-size: xx-large;
-    margin: -128px 0px 0px -21px;
+  color: teal;
+    font-size: 9pt;
+    margin: -53px 0px 0px 1px;
+    width: 90%;
 }
 #heading blockquote {
-    border-left: 49px solid #a93226;
+  border-left: 14px solid #a93226;
     color: teal;
-    font-size: xx-large;
+    font-size: 9pt;
     font-family: cursive;
-    width: 120rem;
+    width: 34rem;
+    margin-left: -20px;
+    margin-top: -13px;
 }
 .hi {
-    width: 157px;
+    width: 38px;
 }
 #fhi3 {
+  position: relative;
+    top: -6rem;
+    margin-left: 8rem;
+}
+.n{
+  position: absolute;
+    top: 35rem;
+    right: 17rem;
+    margin-left: -3rem;
+}
+.sb{
+  width: 14rem;
     position: relative;
-    top: -17rem;
-    margin-left: 27rem;
+    top: -7rem;
+    left: 20rem;
+    font-size: 10pt;
 }
 .body {
-    position: absolute;
-    top: 112rem;
-    left: 0rem; 
+  position: absolute;
+    top: 56rem;
+    left: 0rem;
     background: #e2a39d1c;
-    width: 133rem;
+    width: 100%;
     padding: 20px;
 }
-
+#loadMore {
+    background: #A93226;
+    outline: none;
+    color: white;
+    width: 8rem;
+    padding: 7px;
+    border-radius: 5px;
+    margin-left: 10rem;
+    margin-top: 1rem;
+    font-size: 9pt;
+}
+.footer{width: 100%;
+    height: 5rem;
+    background: #A93226;
+    padding: 6px;
+    color: white;
+     margin-left: 0px; 
+    /* margin-bottom: -15px; */
+    text-align: center;
+    padding-top: 14px;
   }
+   }
     </style>
     <script>
     $(document).ready(function () {
@@ -582,7 +627,7 @@
                     <option th:each="subject:${subjectsList}" th:value="${subject}" th:label="${subject}"></option>
                 </datalist>
             </div>
-            <button class="btn btn-primary b" type="submit">Search by Subject</button>
+            <button class="btn btn-primary sb b" type="submit">Search by Subject</button>
         </form>
     </nav>
 
@@ -625,6 +670,39 @@
                 </div>
             </div>
             <!-- cards -->
+            <div class="card" th:each="pdf :${pdfs}">
+              <div th:switch="${pdf.contentType}">
+                  <img th:case="'PDF'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/pdf.png"/>
+                  <img th:case="'DOC'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/word.png"/>
+                  <img th:case="'IMG'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/image.png"/>
+                  <img th:case="'OTHER'" class="card-img-top"
+                       src="https://img.icons8.com/wired/64/000000/word.png"/>
+              </div>
+              <a th:href="@{/download(id=${pdf.assignmentId})}">
+                  <button class="d btn my-2 my-sm-0" type="submit"><img
+                          src="https://img.icons8.com/metro/26/000000/download.png"/></button>
+              </a>
+              <span class="i" th:text="${pdf.assignmentId}"></span>
+              <div class="date"><span>End date: <p th:text="${pdf.endDate}">2020/05/23</p></span></div>
+
+              <div class="card-body">
+                  <h5 class="card-title" th:text="${pdf.subject}"><b>Digital Image Processing</b></h5>
+                  <p class="card-text" th:text="${pdf.description}">This is a wider card with supporting text below as
+                      a
+                      natural lead-in to additional
+                      content. This content is a little bit longer.</p>
+                  <p style="margin-left:1rem;"><strong>Published: </strong> <span
+                          th:text="${#strings.abbreviate(pdf.username,10)}">Nimal Perera</span>
+                      <a href="#mail">
+                          <button class="btn my-2 my-sm-0 b1">get assignment</button>
+                      </a>
+                  </p>
+
+              </div>
+              <div class="card-footer">
+                  <small>Last Update: </small><small class="text-muted" th:text="${pdf.createDate}"></small>
+              </div>
+          </div>
         </div>
     </div>
     <div>
