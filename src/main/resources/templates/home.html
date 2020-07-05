@@ -342,7 +342,7 @@
   }
 
 /* //for mobile */
-  @media only screen and (max-width: 380px){
+  @media only screen and (max-width: 600px){
      
     /* body{
       background: yellow;
@@ -463,14 +463,14 @@
 .n{
   position: absolute;
     top: 35rem;
-    right: 17rem;
+    left: 4px;
     margin-left: -3rem;
 }
 .sb{
-  width: 14rem;
+  width: 13rem;
     position: relative;
     top: -7rem;
-    left: 20rem;
+    left: 22rem;
     font-size: 10pt;
 }
 .body {
@@ -481,6 +481,9 @@
     width: 100%;
     padding: 20px;
 }
+.card{
+  width: 100%;
+}
 #loadMore {
     background: #A93226;
     outline: none;
@@ -488,7 +491,7 @@
     width: 8rem;
     padding: 7px;
     border-radius: 5px;
-    margin-left: 10rem;
+    margin-left: 14rem;
     margin-top: 1rem;
     font-size: 9pt;
 }
@@ -670,39 +673,7 @@
                 </div>
             </div>
             <!-- cards -->
-            <div class="card" th:each="pdf :${pdfs}">
-              <div th:switch="${pdf.contentType}">
-                  <img th:case="'PDF'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/pdf.png"/>
-                  <img th:case="'DOC'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/word.png"/>
-                  <img th:case="'IMG'" class="card-img-top" src="https://img.icons8.com/wired/64/000000/image.png"/>
-                  <img th:case="'OTHER'" class="card-img-top"
-                       src="https://img.icons8.com/wired/64/000000/word.png"/>
-              </div>
-              <a th:href="@{/download(id=${pdf.assignmentId})}">
-                  <button class="d btn my-2 my-sm-0" type="submit"><img
-                          src="https://img.icons8.com/metro/26/000000/download.png"/></button>
-              </a>
-              <span class="i" th:text="${pdf.assignmentId}"></span>
-              <div class="date"><span>End date: <p th:text="${pdf.endDate}">2020/05/23</p></span></div>
-
-              <div class="card-body">
-                  <h5 class="card-title" th:text="${pdf.subject}"><b>Digital Image Processing</b></h5>
-                  <p class="card-text" th:text="${pdf.description}">This is a wider card with supporting text below as
-                      a
-                      natural lead-in to additional
-                      content. This content is a little bit longer.</p>
-                  <p style="margin-left:1rem;"><strong>Published: </strong> <span
-                          th:text="${#strings.abbreviate(pdf.username,10)}">Nimal Perera</span>
-                      <a href="#mail">
-                          <button class="btn my-2 my-sm-0 b1">get assignment</button>
-                      </a>
-                  </p>
-
-              </div>
-              <div class="card-footer">
-                  <small>Last Update: </small><small class="text-muted" th:text="${pdf.createDate}"></small>
-              </div>
-          </div>
+            
         </div>
     </div>
     <div>
