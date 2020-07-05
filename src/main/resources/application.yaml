@@ -13,10 +13,6 @@ spring:
     cassandra:
       request:
         timeout: 10s
-
-
-
-
 #  data:
 #    mongodb:
 #      database: assignmentStore

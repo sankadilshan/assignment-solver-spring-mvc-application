@@ -4,16 +4,16 @@
 
 <head>
     <title>Assignment Solver</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- <meta charset=UTF-8" /> -->
     <link rel='icon' type='image/png' href='favico.PNG'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
     body {
       background: white;
-      height: 100rem;
+      width: 100%;
     }
 
     .nav {
@@ -341,7 +341,123 @@
    margin-bottom:-1rem
   }
 
+  @media only screen and (max-width: 380px){
+     
+    /* body{
+      background: yellow;
+    } */
 
+    #sidenav {
+      width: 100%;
+    height: 11rem;
+    background: #A93226;
+    position: fixed;
+    top: 12px;
+    border-radius: 13px;
+    z-index: 100;
+}
+
+#sidenav #pimage {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    background: #CD6155;
+    position: absolute;
+    top: 12rem;
+    left: 4rem;
+}
+#username {
+    position: absolute;
+    top: 17rem;
+    left: 27rem;
+    color: teal;
+    font-family: fantasy;
+    font-size: xx-large;
+}
+#menu {
+    position: absolute;
+    top: 3rem;
+    /* left: 4rem; */
+    /* font-size: 12pt; */
+    /* float: right; */
+}
+#menu ul li {
+    list-style: none;
+    color: #2d7dad;
+    font-size: xx-large;
+    font-weight: 100;
+    padding-left: 15px;
+    /* text-align: center; */
+    display: inline;
+}
+.nav {
+    position: absolute;
+    top: 18rem;
+    right: -90rem;
+}
+.nav ul li {
+    display: inline;
+    color: #A93226;
+    margin-left: 2px;
+    font-size: 22pt;
+}
+#heading {
+    position: absolute;
+    top: 31rem;
+    margin-left: 9rem;
+}
+#heading #hf {
+    font-size: 130pt;
+    color: teal;
+    font-weight: bolder;
+    font-style: normal;
+}
+#heading #hs {
+    font-size: 130pt;
+    color: #A93226;
+    font-weight: bolder;
+    font-style: normal;
+    position: absolute;
+    left: 54rem;
+    top: 0rem;
+}
+#hi1 {
+    position: relative;
+    top: -13rem;
+    left: 110rem;
+    transform: rotate(30deg);
+    width: 12rem;
+}
+#heading h4 {
+    color: teal;
+    font-size: xx-large;
+    margin: -128px 0px 0px -21px;
+}
+#heading blockquote {
+    border-left: 49px solid #a93226;
+    color: teal;
+    font-size: xx-large;
+    font-family: cursive;
+    width: 120rem;
+}
+.hi {
+    width: 157px;
+}
+#fhi3 {
+    position: relative;
+    top: -17rem;
+    margin-left: 27rem;
+}
+.body {
+    position: absolute;
+    top: 112rem;
+    left: 0rem; 
+    background: #e2a39d1c;
+    width: 133rem;
+    padding: 20px;
+}
+
+  }
     </style>
     <script>
     $(document).ready(function () {
