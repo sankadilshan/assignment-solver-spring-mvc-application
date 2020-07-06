@@ -307,7 +307,7 @@ h3{
       position: absolute;
       top: 10rem;
       margin-left: 21rem;
-      z-index=-1
+      z-index:-1;
     }
  #heading #hf {
       font-size: 80pt;
@@ -325,7 +325,50 @@ h3{
       left: 21rem;
       top: 0rem;
     }
-
+    @media only screen and (max-width: 600px){
+      #heading {
+    width: 100%;
+    position: absolute;
+    top: 10rem;
+    padding-left: 8rem;
+      }
+      #heading #hf {
+    font-size: 80pt;
+    color: teal;
+    font-weight: bolder;
+    font-style: normal;
+}
+#heading #hs {
+    font-size: 80pt;
+    color: #A93226;
+    font-weight: bolder;
+    font-style: normal;
+    position: absolute;
+    left: 29rem;
+    top: 0rem;
+}
+#formContent {
+  max-width: 87%;
+  margin-top: -31rem;
+}
+h3{
+  font-size: 51pt;
+}
+.form-group{
+  font-size: 28pt;
+}
+input[type=text]{
+  font-size: 45pt;
+}
+.submit{
+  width: 45rem;
+  margin:1rem 0rem 1rem 0rem;
+  font-size: xx-large;
+}
+#formFooter{
+  font-size: xx-large;
+}
+    }
     </style>
 </head>
 <body>
