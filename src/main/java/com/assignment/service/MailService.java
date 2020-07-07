@@ -1,6 +1,8 @@
 package com.assignment.service;
 
 import com.assignment.model.dto.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +15,8 @@ import java.util.Date;
 
 @Service
 public class MailService {
+
+    private final Logger logger= LoggerFactory.getLogger(MailService.class);
 
     @Autowired
     private JavaMailSender mailSender;
@@ -53,6 +57,16 @@ public class MailService {
 
     }
 
+    public boolean sendTwoFactorAuthenticationCode(long code){
+        try{
+            String currentUserEmail=userService.getCurrentUser().getEmail();
+            logger.info("current user mail "+currentUserEmail);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
     private AssignmentMail findToAddress(long assignmentId) {
 //        return restTemplate.getForObject("http://localhost:9001/user/address/" + assignmentId, AssignmentMail.class);
           return  assignmentService.findByAssignmentId(assignmentId);

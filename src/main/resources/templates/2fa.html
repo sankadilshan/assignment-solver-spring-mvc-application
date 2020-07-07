@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Assignment Solver</title>
+    <!-- <meta charset=UTF-8" /> -->
+    <link rel='icon' type='image/png' href='favico.PNG'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+    font-family: "Lato", sans-serif;
+}
+ img{
+     width:15rem;
+     height: 15rem;
+     border-radius: 50%;
+ }
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 41rem;
+    background-color: teal;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-top: 20px;
+}
+
+.b{
+  margin-top:-33px;
+  margin-left:73px;
+}
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+    padding-top: 15px;
+    height:100%;
+      }
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+    .sidenav {
+    height:100%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        height:100%;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+    margin-top: -3rem;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-teal{
+    background-color: teal !important;
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+    <div class="sidenav">
+        <div class="login-main-text">
+            <img src="2fa.jpg" alt="2fa">
+           <h2>Assignment Solver</h2>
+           <p>Security Two Factor Authentication</p>
+           <p>Thanks for keeping your account secure.
+               Check your email <b>assignmentsolver@gmail.com</b>
+           </p>
+        </div>
+     </div>
+     <div class="main">
+        <div class="col-md-6 col-sm-12">
+           <div class="login-form">
+              <form th:action="@{/twofactorauthentication}" method="post">
+                 <div class="form-group">
+                    <label>Your Verification Code</label>
+                    <input type="text" class="form-control" name="code" placeholder="6-digit code" required/>
+                 </div>
+                 <button type="submit" class="btn btn-secondary">Submit</button>
+              </form>
+               <div class="b">
+               <button type="submit" class="btn btn-teal">ReSend</button>
+               <button type="submit" class="btn btn-secondary">Cancel</button>
+               </div>
+           </div>
+        </div>
+     </div>
+</body>    
+</html>

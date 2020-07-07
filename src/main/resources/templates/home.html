@@ -357,6 +357,9 @@
     border-radius: 5px;
     z-index: 100;
 }
+.mob{
+  display:none;
+}
 #sidenav #pimage {
   width: 8rem;
     height: 8rem;
@@ -403,10 +406,11 @@
   list-style: none;
     color: #2d7dad;
     font-size: unset;
-    font-weight: 100;
+    font-weight: 600;
     padding-left: 8px;
     text-align: center;
     display: inline;
+    font-style: italic;
 }
 .nav {
   position: absolute;
@@ -517,7 +521,7 @@
     font-size: 9pt;
 }
 .footer{width: 100%;
-    height: 5rem;
+    height: max-content;
     background: #A93226;
     padding: 6px;
     color: white;
@@ -525,6 +529,18 @@
     /* margin-bottom: -15px; */
     text-align: center;
     padding-top: 14px;
+  }
+  .footer .foot{
+     margin: 5px;
+     text-align: start;
+     display: flex;
+    flex-wrap: wrap;
+  }
+  .foot ul li{
+    list-style: none;
+  }
+  hr{
+    margin-bottom: 1rem;
   }
    }
     </style>
@@ -606,13 +622,13 @@
             <li>
                 <a href="#postassingment">Post Assignment</a>
             </li>
-            <li>
+            <li class="mob">
                 <a href="#" data-target="#about" data-toggle="modal"> About us</a>
             </li>
-            <li>
+            <li class="mob">
                 <a href="#" data-target="#privacyPolicy" data-toggle="modal">Privacy Policy</a>
             </li>
-            <li>
+            <li class="mob">
                 <a href="#" data-target="#about" data-toggle="modal">Contact us</a>
             </li>
         </ul>
@@ -757,7 +773,26 @@
     </div>
     <br>
     <div class="footer">
-        <p>@alright recieved</p>
+      <div class="foot">
+          <ul>
+            <li>Guide</li>
+            <li>
+                <a href="#" data-target="#about" data-toggle="modal"> About us</a>
+            </li>
+            <li>
+              <a href="#" data-target="#about" data-toggle="modal">Contact us</a>
+          </li>
+          </ul>
+          <ul>
+          <li>
+            <li>
+              <a href="#" data-target="#privacyPolicy" data-toggle="modal">Privacy Policy</a>
+          </li>  
+            <li>Term of service</li>
+          </ul>
+      </div>
+      <hr>
+        <p>&copy; Copyright Assignmentsolver.com</p>
     </div>
     <div class="modal" id="privacyPolicy">
         <div class="privacy modal-dialog ">

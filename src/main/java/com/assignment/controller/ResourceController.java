@@ -6,6 +6,7 @@ import com.assignment.model.dto.*;
 import com.assignment.repository.UserRepository;
 import com.assignment.service.AssignmentService;
 import com.assignment.service.MailService;
+import com.assignment.service.TwoFactorAuthentication;
 import com.assignment.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,8 @@ public class ResourceController {
     private UserService userService;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private TwoFactorAuthentication twoFactorAuthentication;
 
     public ResourceController() {
     }
@@ -77,12 +80,24 @@ public class ResourceController {
         model.addAttribute("assignments", counters.getAssignment());
         model.addAttribute("subjectsList", getSubjects());
 
-
-
         //logger.info("user iamge" + currentUser.getEmail());
         return "home";
     }
+    @GetMapping("/twofactorauthentication")
+    public String twofactorauthentication() throws Exception {
+        twoFactorAuthentication.genereteAuthenticationCode();
+        return "2fa";
+    }
 
+    @PostMapping("/twofactorauthentication")
+    public void twoFctorAuthentication(HttpServletResponse response,@RequestParam("code") long code) throws Exception {
+       logger.info("code "+code);
+       if (twoFactorAuthentication.checkCodeValidation(code)) {
+           response.sendRedirect("/home");
+       }else {
+           response.sendRedirect("/twofactorauthentication");
+       }
+    }
 
     @GetMapping("/profileImage")
     public void dislpayProfileImage(HttpServletResponse response,Model model) throws IOException {
