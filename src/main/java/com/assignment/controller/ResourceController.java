@@ -84,8 +84,11 @@ public class ResourceController {
         return "home";
     }
     @GetMapping("/twofactorauthentication")
-    public String twofactorauthentication() throws Exception {
-        twoFactorAuthentication.genereteAuthenticationCode();
+    public String twofactorauthentication(Model model) throws Exception {
+        String currentUser = userService.getCurrentUser().getEmail();
+        model.addAttribute("email",currentUser.split("@")[0]);
+        if (!twoFactorAuthentication.generated)
+            twoFactorAuthentication.genereteAuthenticationCode();
         return "2fa";
     }
 
@@ -97,6 +100,12 @@ public class ResourceController {
        }else {
            response.sendRedirect("/twofactorauthentication");
        }
+    }
+    @GetMapping("/resend")
+    public String reSendVerificationCode() throws Exception {
+       Thread.sleep(60*1000);
+        twoFactorAuthentication.genereteAuthenticationCode();
+        return "2fa";
     }
 
     @GetMapping("/profileImage")
@@ -204,6 +213,7 @@ public class ResourceController {
 
     @GetMapping("/logout")
     public String logout(Model model) {
+        logger.info("logout");
         return "signin";
     }
 

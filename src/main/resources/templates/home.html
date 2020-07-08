@@ -354,7 +354,6 @@
     background: #A93226;
     position: absolute;
     /* top: 12px; */
-    border-radius: 5px;
     z-index: 100;
 }
 .mob{
@@ -529,6 +528,7 @@
     /* margin-bottom: -15px; */
     text-align: center;
     padding-top: 14px;
+        border-radius: 4px 4px;
   }
   .footer .foot{
      margin: 5px;
@@ -699,7 +699,7 @@
                         natural lead-in to additional
                         content. This content is a little bit longer.</p>
                     <p style="margin-left:1rem;"><strong>Published: </strong> <span
-                            th:text="${#strings.abbreviate(pdf.username,10)}">Nimal Perera</span>
+                            th:text="${#strings.arraySplit(pdf.username,'@')[0]}">Nimal Perera</span>
                         <a href="#mail">
                             <button class="btn my-2 my-sm-0 b1">get assignment</button>
                         </a>

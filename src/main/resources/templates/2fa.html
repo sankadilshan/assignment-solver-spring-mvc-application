@@ -108,11 +108,11 @@
 <body>
     <div class="sidenav">
         <div class="login-main-text">
-            <img src="2fa.jpg" alt="2fa">
+            <img src="resources/templates/2fa.jpg" alt="2fa">
            <h2>Assignment Solver</h2>
            <p>Security Two Factor Authentication</p>
            <p>Thanks for keeping your account secure.
-               Check your email <b>assignmentsolver@gmail.com</b>
+               Check your email <b th:text="${email}">assignmentsolvver</b><b>xxxxxxx.com</b>
            </p>
         </div>
      </div>
@@ -127,8 +127,8 @@
                  <button type="submit" class="btn btn-secondary">Submit</button>
               </form>
                <div class="b">
-               <button type="submit" class="btn btn-teal">ReSend</button>
-               <button type="submit" class="btn btn-secondary">Cancel</button>
+                   <a href="/resend" ><button type="button" class="btn btn-teal" >ReSend</button></a>
+                   <a href="/signin"><button type="button" class="btn btn-secondary">Cancel</button></a>
                </div>
            </div>
         </div>
