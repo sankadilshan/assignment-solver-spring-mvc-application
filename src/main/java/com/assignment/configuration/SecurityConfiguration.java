@@ -9,15 +9,18 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+@EnableWebMvc
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -27,20 +30,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     private AuthenticationEntry authenticationEntry;
     @Autowired
     private CustomeLogoutHandler logoutHandler;
-     @Bean
+
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
     }
 
@@ -49,15 +53,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/signin","/signinerror").permitAll()
-                .antMatchers("/signup").permitAll()
+                .antMatchers("/signin", "/signinerror").permitAll()
+                .antMatchers("/signup", "/images/**").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/signin")
-                .defaultSuccessUrl("/twofactorauthentication",true)
+                .defaultSuccessUrl("/twofactorauthentication", true)
                 .passwordParameter("password")
                 .usernameParameter("email")
                 .and()
@@ -68,6 +72,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK));
 
+    }
 
-}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(
+                "/webjars/**",
+                "/images/**",
+                "css/**")
+                .addResourceLocations("classpath:/static/images/");
+
+    }
 }

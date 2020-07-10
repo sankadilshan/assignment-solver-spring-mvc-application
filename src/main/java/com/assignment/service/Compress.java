@@ -7,7 +7,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 public interface Compress {
-    public static byte[] compressBytes(byte[] data) {
+    static byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
         deflater.finish();
@@ -25,7 +25,7 @@ public interface Compress {
         return outputStream.toByteArray();
     }
 
-    public static byte[] decompressBytes(byte[] data) {
+    static byte[] decompressBytes(byte[] data) {
         Inflater inflater = new Inflater();
         inflater.setInput(data);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);

@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -73,54 +72,55 @@ public class ResourceController {
         Count counters = getCounters();
         model.addAttribute("pdfs", getAllAssignment());
         model.addAttribute("currentUser", currentUser.getEmail());
-//        model.addAttribute("type", "PDF");
         model.addAttribute("loginSuccess", true);
         model.addAttribute("loginFalse", false);
         model.addAttribute("members", counters.getMembers());
         model.addAttribute("assignments", counters.getAssignment());
         model.addAttribute("subjectsList", getSubjects());
-
-        //logger.info("user iamge" + currentUser.getEmail());
         return "home";
     }
+
     @GetMapping("/twofactorauthentication")
-    public String twofactorauthentication(Model model) throws Exception {
-        String currentUser = userService.getCurrentUser().getEmail();
-        model.addAttribute("email",currentUser.split("@")[0]);
+    public String twofactorauthentication(HttpServletResponse response, Model model) throws Exception {
+        UserGetDto currentUser = userService.getCurrentUser();
+        logger.info("called two factor");
+        if (!currentUser.isTwoFactor()) {
+            response.sendRedirect("/home");
+        }
+        model.addAttribute("email", currentUser.getEmail().split("@")[0]);
         if (!twoFactorAuthentication.generated)
             twoFactorAuthentication.genereteAuthenticationCode();
         return "2fa";
     }
 
     @PostMapping("/twofactorauthentication")
-    public void twoFctorAuthentication(HttpServletResponse response,@RequestParam("code") long code) throws Exception {
-       logger.info("code "+code);
-       if (twoFactorAuthentication.checkCodeValidation(code)) {
-           response.sendRedirect("/home");
-       }else {
-           response.sendRedirect("/twofactorauthentication");
-       }
+    public void twoFctorAuthentication(HttpServletResponse response, @RequestParam("code") long code) throws Exception {
+        logger.info("generated verification code");
+        if (twoFactorAuthentication.checkCodeValidation(code)) {
+            response.sendRedirect("/home");
+        } else {
+            response.sendRedirect("/twofactorauthentication");
+        }
     }
+
     @GetMapping("/resend")
     public String reSendVerificationCode() throws Exception {
-       Thread.sleep(60*1000);
+        Thread.sleep(60 * 1000);
         twoFactorAuthentication.genereteAuthenticationCode();
         return "2fa";
     }
 
     @GetMapping("/profileImage")
-    public void dislpayProfileImage(HttpServletResponse response,Model model) throws IOException {
-        logger.info("current user 1 " + "email");
+    public void dislpayProfileImage(HttpServletResponse response, Model model) throws IOException {
+        logger.info("display profile image");
         UserGetDto user = userService.getCurrentUser();
         response.setContentType("image/jpeg,image/png,image/jpg, image/gif");
-       // byte[] data = user.getImage().getData();
         response.getOutputStream().write(user.getImage());
         response.getOutputStream().close();
     }
 
     @GetMapping("/signin")
     public String getLogin() {
-       // logger.info("redirect to sign in page");
         return "signin";
     }
 
@@ -131,8 +131,7 @@ public class ResourceController {
 
     @GetMapping("/signinerror")
     public String error(Model model) {
-//        model.addAttribute("condition",false);
-        logger.error("error login ......");
+        logger.error("error");
         return "signin";
     }
 
@@ -164,7 +163,6 @@ public class ResourceController {
     @GetMapping("/download")
     public ResponseEntity<?> download(@RequestParam("id") String id, HttpServletResponse response) throws ChangeSetPersister.NotFoundException {
         AssignmentMultipart assignmentMultipart = assignmentService.downloadFile(Integer.parseInt(id));
-        logger.info("download " + id);
         response.setContentType(assignmentMultipart.getFileType());
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(assignmentMultipart.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + assignmentMultipart.getFileName() + "\"")
@@ -172,14 +170,12 @@ public class ResourceController {
     }
 
     @PostMapping("/mail")
-    public RedirectView sendMail(@ModelAttribute(name = "mail") Mail mail, Model model,RedirectAttributes redirect) {
-        logger.info("assignment id"+ mail.getAssignmentId());
+    public RedirectView sendMail(@ModelAttribute(name = "mail") Mail mail, Model model, RedirectAttributes redirect) {
         boolean send = mailService.send(mail);
         if (send) {
             redirect.addAttribute("condition", send);
             redirect.addAttribute("message", "mail sent successfully");
-        }
-        else{
+        } else {
             redirect.addAttribute("_condition", send);
             redirect.addAttribute("message", "mail sending fail, Try within few minutes");
         }
@@ -188,7 +184,7 @@ public class ResourceController {
 
     @PostMapping("/search")
     public String getSearchAssignment(@ModelAttribute("search") Search search, Model model) {
-        logger.info("search value" + search);
+        logger.info("" + search);
         List<Assignment> collect = getAllAssignment().stream().filter(assignment -> assignment.getSubject().equals(search.getSubject())).collect(Collectors.toList());
         collect.forEach(assignment -> System.out.println(assignment.getContentType()));
         UserGetDto currentUser = userService.getCurrentUser();
@@ -196,7 +192,6 @@ public class ResourceController {
         Count counters = getCounters();
         model.addAttribute("pdfs", collect);
         model.addAttribute("currentUser", currentUser.getEmail());
-//        model.addAttribute("type", "PDF");
         model.addAttribute("loginSuccess", true);
         model.addAttribute("loginFalse", false);
         model.addAttribute("members", counters.getMembers());
@@ -218,36 +213,50 @@ public class ResourceController {
     }
 
     @GetMapping("/user/address/{id}")
-    public AssignmentMail getCurrentUser(@PathVariable("id") long assignmentId){
-      return  assignmentService.findByAssignmentId(assignmentId);
+    public AssignmentMail getCurrentUser(@PathVariable("id") long assignmentId) {
+        return assignmentService.findByAssignmentId(assignmentId);
     }
+
     private List<String> getSubjects() {
         List<String> subjects = assignmentService.getSubjects();
         return subjects;
 
     }
-    private List<Assignment> getAllAssignment(){
+
+    private List<Assignment> getAllAssignment() {
         List<Assignment> allAssignments = assignmentService.getAllAssignments();
-              allAssignments.forEach(
+        allAssignments.forEach(
                 assignment -> {
-                    String[] split=assignment.getContentType().split("/",2);
+                    String[] split = assignment.getContentType().split("/", 2);
                     if (split[1].equals("pdf")) {
                         assignment.setContentType("PDF");
-                       // logger.info("pdf"+split[1]);
-                    }
-                    else if (split[1].equals("msword") || split[1].equals("octet-stream")) {
+                    } else if (split[1].equals("msword") || split[1].equals("octet-stream")) {
                         assignment.setContentType("DOC");
-                       // logger.info("msword"+split[1]);
-                    }
-                    else if (split[1].equals("jpeg") || split[1].equals("png") || split[1].equals("jpg")) {
+                    } else if (split[1].equals("jpeg") || split[1].equals("png") || split[1].equals("jpg")) {
                         assignment.setContentType("IMG");
-                    }
-                    else {
+                    } else {
                         assignment.setContentType("OTHER");
                     }
                 }
         );
-              return allAssignments;
+        return allAssignments;
     }
 
+    @GetMapping("/processingUrl")
+    public void processingUrl(HttpServletResponse response) throws Exception {
+        if (true) {
+            response.sendRedirect("/twofactorauthentication");
+        } else {
+            response.sendRedirect("/home");
+        }
+    }
+   @GetMapping("/exception")
+    public String handellingException(){
+        return "exception";
+   }
+
+   @GetMapping("/ioexception")
+    public String handellingIoException(){
+        return "ioexception";
+   }
 }

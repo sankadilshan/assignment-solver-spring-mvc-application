@@ -5,7 +5,9 @@
 <head>
     <title>Assignment Solver</title>
     <!-- <meta charset=UTF-8" /> -->
-    <link rel='icon' type='image/png' href='favico.PNG'>
+    <link rel="icon"
+          type="image/png"
+          href="/images/favico.PNG">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -32,9 +34,10 @@
     #username{
        position: absolute;
        top: 8rem;
-       left: 7rem;
+       left: 3rem;
        color: white;
-       font-family: fantasy;
+       font-family: italic;
+       font-size:large
      }
     .b {
       background: #A93226;
@@ -340,7 +343,12 @@
    padding:20px;
    margin-bottom:-1rem
   }
-
+  .foot{
+  display:none;
+  }
+  hr{
+  display:none;
+  }
 /* //for mobile */
   @media only screen and (max-width: 600px){
      
@@ -543,6 +551,7 @@
     margin-bottom: 1rem;
   }
    }
+
     </style>
     <script>
     $(document).ready(function () {
@@ -565,6 +574,7 @@
     }
     setTimeout("showAlert()",2000);
     setTimeout("hideAlert()",10000);
+
 
 
 
@@ -711,7 +721,7 @@
                 </div>
             </div>
             <!-- cards -->
-            
+
         </div>
     </div>
     <div>
@@ -760,6 +770,11 @@
                        placeholder="add selected assignment id" required>
             </div>
             <div class="form-group">
+                <label for="subject">Your Qualification to do this assignment</label>
+                <input type="text" class="form-control" id="qualification" name="qualification"
+                       placeholder="qualification/experiences" required>
+            </div>
+            <div class="form-group">
                 <label for="subject">Message to Publisher</label>
                 <input type="text" class="form-control" id="msg" name="msg" placeholder="write your msg" required>
             </div>
@@ -773,25 +788,25 @@
     </div>
     <br>
     <div class="footer">
-      <div class="foot">
-          <ul>
-            <li>Guide</li>
-            <li>
-                <a href="#" data-target="#about" data-toggle="modal"> About us</a>
-            </li>
-            <li>
-              <a href="#" data-target="#about" data-toggle="modal">Contact us</a>
-          </li>
-          </ul>
-          <ul>
-          <li>
-            <li>
-              <a href="#" data-target="#privacyPolicy" data-toggle="modal">Privacy Policy</a>
-          </li>  
-            <li>Term of service</li>
-          </ul>
-      </div>
-      <hr>
+        <div class="foot">
+            <ul>
+                <li>Guide</li>
+                <li>
+                    <a href="#" data-target="#about" data-toggle="modal"> About us</a>
+                </li>
+                <li>
+                    <a href="#" data-target="#about" data-toggle="modal">Contact us</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                <li>
+                    <a href="#" data-target="#privacyPolicy" data-toggle="modal">Privacy Policy</a>
+                </li>
+                <li>Term of service</li>
+            </ul>
+        </div>
+        <hr>
         <p>&copy; Copyright Assignmentsolver.com</p>
     </div>
     <div class="modal" id="privacyPolicy">

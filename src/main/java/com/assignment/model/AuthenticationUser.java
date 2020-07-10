@@ -10,9 +10,9 @@ public class AuthenticationUser implements UserDetails {
     private String email;
     private String password;
 
-    public  AuthenticationUser(User user){
+    public AuthenticationUser(User user) {
         this.email = user.getEmail();
-        this.password=user.getPassword();
+        this.password = user.getPassword();
     }
 
     @Override

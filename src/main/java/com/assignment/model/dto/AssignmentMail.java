@@ -15,3 +15,4 @@ public class AssignmentMail {
     private LocalDate createdDate;
     private String email;
 }
+

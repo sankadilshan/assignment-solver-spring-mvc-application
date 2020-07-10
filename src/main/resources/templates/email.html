@@ -1,0 +1,122 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- If you delete this meta tag, Half Life 3 will never be released. -->
+    <meta name="viewport" content="width=device-width"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/email.css"/>
+
+</head>
+
+<body style="background:#FFFFFF;">
+
+<!-- HEADER -->
+<table class="head-wrap">
+    <tr>
+        <td></td>
+        <td class="header container">
+
+            <div class="content">
+                <table style="background:#999999;">
+                    <tr>
+                        <td><img src="https://freesvg.org/img/1339317289.png" style="    width: 100%; height: 15rem;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap" style="width:100%; background:wheat">
+    <tr>
+        <td></td>
+        <td class="container" style="background:#FFFFFF;">
+
+            <div class="content">
+                <table style="color:teal; width:100%">
+                    <tr>
+                        <td>
+                            <h3><b><u>Assignment Solver.</u></b></h3>
+                            <h4><b>Two Factor Authentication Code</b></h4>
+                            <p class="lead">Thanks for keeping your account secure.</p>
+                            <p>Hi <strong><b th:text="${to}"></b>,</strong></p>
+                            <!-- Callout Panel -->
+                            <p class="callout">
+                                one time Password to login for Assignment Solver.Only valid for 05 minutes.
+                            </p><!-- /Callout Panel -->
+                            <table class="social" width="100%">
+                                <tr>
+                                    <td>
+                                        <div style="width:15rem; background:teal; color:white;text-align:center; padding:1px">
+                                            <p th:text="${code}">code</p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <!-- social & contact -->
+                            <table class="social" style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <table align="left" class="column">
+                                            <tr>
+                                                <td>
+
+                                                    <h5 class="">Contact Info:</h5>
+                                                    <p>Email: <strong><a href="emailto:assignmentsolver@gmail.com">assignmentsolver@gmail.com</a></strong>
+                                                    </p>
+
+                                                </td>
+                                            </tr>
+                                        </table><!-- /column 2 -->
+
+                                        <span class="clear"></span>
+
+                                    </td>
+                                </tr>
+
+                            </table><!-- /social & contact -->
+
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /BODY -->
+
+<!-- FOOTER -->
+<table class="footer-wrap">
+    <tr>
+        <td></td>
+        <td class="container">
+
+            <!-- content -->
+            <div class="content">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <p>
+                                <a href="#">Terms</a> |
+                                <a href="#">Privacy</a> |
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /FOOTER -->
+
+</body>
+</html>

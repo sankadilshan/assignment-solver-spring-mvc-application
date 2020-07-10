@@ -12,4 +12,8 @@ public class UserGetDto {
     private byte[] image=new byte[]{};
     private String originalName;
     private String contentType;
+    private boolean twoFactor;
+
+
+
 }

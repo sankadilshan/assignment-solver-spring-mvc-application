@@ -1,6 +1,5 @@
 package com.assignment.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +34,7 @@ public class Assignment {
     private byte[] assignmentFile;
     private String originalName;
     private String contentType;
-    @Temporal(TemporalType.DATE )
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd", style = "SS", iso = DateTimeFormat.ISO.NONE)
     private LocalDate createDate = LocalDate.now();
     @NonNull

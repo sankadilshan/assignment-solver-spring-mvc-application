@@ -10,4 +10,5 @@ public class Mail {
     @NonNull
     private String msg;
     private String contact;
+    private String qualification;
 }
