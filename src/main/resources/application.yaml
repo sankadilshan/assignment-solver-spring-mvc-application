@@ -4,23 +4,23 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
-    data:
-      mongodb:
-        uri: mongodb+srv://assignmentsolver:865PlejVOMNaJ3fN@assignmentsolver.69t4m.mongodb.net/AssignmentSolver?retryWrites=true&w=majority&ssl=true
-        database: AssignmentSolver
-      rest:
-        base-path: /
-      cassandra:
-        request:
-          timeout: 10s
-#  data:
-#    mongodb:
-#      database: assignmentStore
-#      host: localhost
-#      port: 27017
-#      repositories:
+  data:
+    mongodb:
+      uri: mongodb+srv://assignmentsolver:1LX7kPqjjVF1IEHy@cluster0.69t4m.mongodb.net/AssignmentSolver?retryWrites=true&w=majority&ssl=true
+      database: AssignmentSolver
+    rest:
+      base-path: /
+    cassandra:
+      request:
+        timeout: 10s
+# data:
+#   mongodb:
+#     database: assignmentStore
+#     host: localhost
+#     port: 27017
+#     repositories:
 #        type: auto
-#      enabled: true
+#     enabled: true
   jpa:
     hibernate:
       ddl-auto: 'create-drop'
